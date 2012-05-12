@@ -1,8 +1,8 @@
 #ifndef ADDRESS_MODES
 #define ADDRESS_MODES
-#include "CPU.h";
+#include "CPU.h"
 
-WORD C_CPU::ZeroPage(int cycleCount)
+BYTE C_CPU::ZeroPage(int cycleCount)
 {
 	//get result using zero page
 	WORD result = systemMem[m_pc + 1];
@@ -14,7 +14,7 @@ WORD C_CPU::ZeroPage(int cycleCount)
 	//todo TEST
 }
 
-WORD C_CPU::ZeroPageX(int cycleCount)
+BYTE C_CPU::ZeroPageX(int cycleCount)
 {
 	//stores accumulator in memory. 
 	WORD result = systemMem[m_pc + 1 + m_regX];
@@ -26,7 +26,7 @@ WORD C_CPU::ZeroPageX(int cycleCount)
 	//todo TEST
 }
 
-WORD C_CPU::ZeroPageY(int cycleCount)//zero page Y
+BYTE C_CPU::ZeroPageY(int cycleCount)//zero page Y
 {
 	//stores accumulator in memory. 
 	WORD result = systemMem[m_pc + 1 + m_regY];
@@ -38,7 +38,7 @@ WORD C_CPU::ZeroPageY(int cycleCount)//zero page Y
 	//todo TEST
 }
 
-WORD C_CPU::Absolute(int cycleCount)
+BYTE C_CPU::Absolute(int cycleCount)
 {
 	//stores accumulator in memory.
 	WORD BB = systemMem[m_pc + 1];
@@ -53,7 +53,7 @@ WORD C_CPU::Absolute(int cycleCount)
 	//todo TEST
 }
 
-WORD C_CPU::AbsoluteX(int cycleCount, int pagePlus)//Absolute X
+BYTE C_CPU::AbsoluteX(int cycleCount, int pagePlus)//Absolute X
 {
 	//stores accumulator in memory.
 	WORD BB = systemMem[m_pc + 1];
@@ -73,7 +73,7 @@ WORD C_CPU::AbsoluteX(int cycleCount, int pagePlus)//Absolute X
 	//todo TEST
 }
 
-WORD C_CPU::AbsoluteY(int cycleCount, int pagePlus)//Absolute Y
+BYTE C_CPU::AbsoluteY(int cycleCount, int pagePlus)//Absolute Y
 {
 	//stores accumulator in memory.
 	WORD BB = systemMem[m_pc + 1];
@@ -94,7 +94,7 @@ WORD C_CPU::AbsoluteY(int cycleCount, int pagePlus)//Absolute Y
 	//todo TEST
 }
 
-WORD C_CPU::IndirectX(int cycleCount)//Indirect X
+BYTE C_CPU::IndirectX(int cycleCount)//Indirect X
 {
 	//stores accumulator in memory.
 	WORD BB = systemMem[m_pc + 1];
@@ -110,7 +110,7 @@ WORD C_CPU::IndirectX(int cycleCount)//Indirect X
 	//todo TEST
 }
 
-WORD C_CPU::IndirectY(int cycleCount, int pagePlus)//Indirect Y
+BYTE C_CPU::IndirectY(int cycleCount, int pagePlus)//Indirect Y
 {
 	//stores accumulator in memory.
 	WORD BB = systemMem[m_pc + 1];

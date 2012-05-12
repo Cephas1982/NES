@@ -28,7 +28,7 @@ C_CPU::~C_CPU()
 void C_CPU::GetNextCode()
 {
 	WORD opcode = systemMem[m_pc] & 0x00FF;
-	printf("parsing opcode:  %#X  \n", opcode);
+	printf("parsing opcode:  %#X  ", opcode); printf("   programCounter:  %#X  \n", m_pc);
 //	system("pause");
 	ProcessOpcode(opcode);
 
@@ -121,7 +121,7 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0xBE: LDX_BE(opcode); break;
 
 	//In case of LDY - Load Y Register opcodes
-	case 0xA0: LDY_A0(opcode); break;
+*/	case 0xA0: LDY_A0(opcode); break; /*
 	case 0xA4: LDY_A4(opcode); break;
 	case 0xB4: LDY_B4(opcode); break;
 	case 0xAC: LDY_AC(opcode); break;
@@ -236,15 +236,15 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0xF1: SBC_F1(opcode); break;
 
 	//In case of CMP - Compare
-	case 0xC9: SBC_C9(opcode); break;
-	case 0xC5: SBC_C5(opcode); break;
-	case 0xD5: SBC_D5(opcode); break;
-	case 0xCD: SBC_CD(opcode); break;
-	case 0xDD: SBC_DD(opcode); break;
-	case 0xD9: SBC_D9(opcode); break;
-	case 0xC1: SBC_C1(opcode); break;
-	case 0xD1: SBC_D1(opcode); break;
-
+*/	case 0xC9: CMP_C9(opcode); break;
+	case 0xC5: CMP_C5(opcode); break;
+	case 0xD5: CMP_D5(opcode); break;
+	case 0xCD: CMP_CD(opcode); break;
+	case 0xDD: CMP_DD(opcode); break;
+	case 0xD9: CMP_D9(opcode); break;
+	case 0xC1: CMP_C1(opcode); break;
+	case 0xD1: CMP_D1(opcode); break;
+/*
 	//In case of CPX - Compare X register
 	case 0xE0: CPX_E0(opcode); break;
 	case 0xE4: CPX_E4(opcode); break;
@@ -257,7 +257,7 @@ void C_CPU::ProcessOpcode(WORD opcode)
 
 
 	/*** Increments and Decrements --------------------------------
-
+	*/
 	//In case of INC - Increment a memory location
 	case 0xE6: INC_E6(opcode); break;
 	case 0xF6: INC_F6(opcode); break;
@@ -265,11 +265,11 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0xFE: INC_FE(opcode); break;
 
 	//In case of INX - Increment the X register
-	case 0xE8: INC_E8(opcode); break;
+	case 0xE8: INX_E8(opcode); break;
 
 
 	//In case of INY - Increment the Y register
-	case 0xE8: INY_C8(opcode); break;
+	case 0xC8: INY_C8(opcode); break;
 
 	//In case of DEC - Decrement a memory location
 	case 0xC6: DEC_C6(opcode); break;
@@ -278,7 +278,10 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0xDE: DEC_DE(opcode); break;
 
 	//In case of DEX - Decrement the X register
-	case 0xCA: INC_CA(opcode); break;
+	case 0xCA: DEX_CA(opcode); break;
+	
+	//In case of DEY - Decrement the Y register
+	case 0x88: DEY_88(opcode); break;
 
 	/*** Shifts --------------------------------
 	//In case of ASL - Arithmetic Shift Left

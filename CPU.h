@@ -31,14 +31,14 @@ public:
 	void ProcessOpcode(WORD);
 
 	//Address modes
-	WORD ZeroPage(int cycleCount);
-	WORD ZeroPageX(int cycleCount);
-	WORD ZeroPageY(int cycleCount);
-	WORD Absolute(int cycleCount);
-	WORD AbsoluteX(int cycleCount, int extra_cycles_if_page_crossed = 0);
-	WORD AbsoluteY(int cycleCount, int extra_cycles_if_page_crossed = 0);
-	WORD IndirectX(int cycleCount);
-	WORD IndirectY(int cycleCount, int extra_cycles_if_page_crossed = 0);
+	BYTE ZeroPage(int cycleCount);
+	BYTE ZeroPageX(int cycleCount);
+	BYTE ZeroPageY(int cycleCount);
+	BYTE Absolute(int cycleCount);
+	BYTE AbsoluteX(int cycleCount, int extra_cycles_if_page_crossed = 0);
+	BYTE AbsoluteY(int cycleCount, int extra_cycles_if_page_crossed = 0);
+	BYTE IndirectX(int cycleCount);
+	BYTE IndirectY(int cycleCount, int extra_cycles_if_page_crossed = 0);
 	BYTE Immediate(int cycleCount);
 
 
@@ -105,5 +105,34 @@ public:
 	void BPL_10(WORD);
 	void BVC_50(WORD);
 	void BVS_70(WORD);
+	//Arithmetic operations------------------
+	//ADC functions here
+	//SBC
+	void CMP_C9(WORD);
+	void CMP_C5(WORD);
+	void CMP_D5(WORD);
+	void CMP_CD(WORD);
+	void CMP_DD(WORD);
+	void CMP_D9(WORD);
+	void CMP_C1(WORD);
+	void CMP_D1(WORD);
+	//CPX
+	//CPY
+	//Increment and decrement operations-------------
+	void INC_E6(WORD);
+	void INC_F6(WORD);
+	void INC_EE(WORD);
+	void INC_FE(WORD);
+
+	void INX_E8(WORD);
+	void INY_C8(WORD);
+
+	void DEC_C6(WORD);
+	void DEC_D6(WORD);
+	void DEC_CE(WORD);
+	void DEC_DE(WORD);
+
+	void DEX_CA(WORD);
+	void DEY_88(WORD);
 };
 #endif
