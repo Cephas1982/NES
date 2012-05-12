@@ -28,8 +28,10 @@ C_CPU::~C_CPU()
 void C_CPU::GetNextCode()
 {
 	WORD opcode = systemMem[m_pc] & 0x00FF;
-	ProcessOpcode(opcode);
 	printf("parsing opcode:  %#X  \n", opcode);
+//	system("pause");
+	ProcessOpcode(opcode);
+
 
 }
 
@@ -320,18 +322,18 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0x60: RTS_60(opcode); break;
 
 
-	/*** Branches --------------------------------
+	/*** Branches --------------------------------*/
 	//In case of BCC - Branch if carry flag clear
 	case 0x90: BCC_90(opcode); break;
 
 	//In case of BCS - Branch if carry flag set
-	case 0xB0: BCC_B0(opcode); break;
+	case 0xB0: BCS_B0(opcode); break;
 
 	//In case of BEQ - Branch if zero flag set
 	case 0xF0: BEQ_F0(opcode); break;
 
 	//In case of BMI - Branch if negative flag set
-	case 0x30: BEQ_30(opcode); break;
+	case 0x30: BMI_30(opcode); break;
 
 	//In case of BNE - Branch if zero flag clear
 	case 0xD0: BNE_D0(opcode); break;
@@ -342,7 +344,7 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	//In case of BVC - Branch if overflow flag clear
 	case 0x50: BVC_50(opcode); break;
 
-	//In case of BMI - Branch if overflow flag set
+	//In case of BVS - Branch if overflow flag set
 	case 0x70: BVS_70(opcode); break;
 
 	/*** Status flags --------------------------------*/

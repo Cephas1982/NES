@@ -3,7 +3,7 @@
 #define HEADER 16 //header size in bytes
 #include <iostream>
 typedef unsigned short int WORD;
-typedef char BYTE;
+typedef unsigned char BYTE;
 
 
 class C_CPU{

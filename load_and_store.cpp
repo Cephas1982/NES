@@ -5,81 +5,97 @@
 /*************** LDA FUNCTIONS ************************/
 void C_CPU::LDA_A9(WORD opcode)//Immediate, 2 cycles
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regA = Immediate(2);
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if(m_regA > 127)
+	if((m_regA & 128) == 128)
 	  m_flagN = 1;
 }
 
 void C_CPU::LDA_A5(WORD opcode)//Zero_Page, 3 cycles
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regA = BYTE(ZeroPage(3));
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if(m_regA > 127)
+	if((m_regA & 128) == 128)
 	  m_flagN = 1;
 }
 
 void C_CPU::LDA_B5(WORD opcode)//Zero_Page X, 4 cycles
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regA = BYTE(ZeroPageX(4));
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if(m_regA > 127)
+	if((m_regA & 128) == 128)
 	  m_flagN = 1;
 }
 
 void C_CPU::LDA_AD(WORD opcode)//Absolute, 4 cycles
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regA = BYTE(Absolute(4));
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if(m_regA > 127)
+	if((m_regA & 128) == 128)
 	  m_flagN = 1;
 }
 
 void C_CPU::LDA_BD(WORD opcode)//Absolute X, 4 cycles (+1 if page crossed)
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regA = BYTE(AbsoluteX(4, 1));
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if(m_regA > 127)
+	if((m_regA & 128) == 128)
 	  m_flagN = 1;
 }
 
 void C_CPU::LDA_B9(WORD opcode)//Absolute Y, 4 cycles (+1 if page crossed)
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regA = BYTE(AbsoluteY(4, 1));
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if(m_regA > 127)
+	if((m_regA & 128) == 128)
 	  m_flagN = 1;
 }
 
 void C_CPU::LDA_A1(WORD opcode)//(Indirect X), 6 cycles //indexed indrect
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regA = BYTE(IndirectX(6));
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if(m_regA > 127)
+	if((m_regA & 128) == 128)
 	  m_flagN = 1;
 }
 
 void C_CPU::LDA_B1(WORD opcode)//(Indirect)Y, 5 cycles(+1 if page crossed)//indirect Indexed
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regA = BYTE(IndirectY(5, 1));
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if(m_regA > 127)
+	if((m_regA & 128) == 128)
 	  m_flagN = 1;
 }
 
@@ -88,6 +104,8 @@ void C_CPU::LDA_B1(WORD opcode)//(Indirect)Y, 5 cycles(+1 if page crossed)//indi
 void C_CPU::LDX_A2(WORD opcode)//Immediate, 2 cycles
 {
 	//load one byte of (system) memory into the Xregister
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regX = BYTE(Immediate(2));
 	if(m_regX == 0)
 	  m_flagZ = 1;
@@ -98,6 +116,8 @@ void C_CPU::LDX_A2(WORD opcode)//Immediate, 2 cycles
 void C_CPU::LDX_A6(WORD opcode)//Zero_Page, 3 cycles
 {
 	//load one byte of (system) memory into the Xregister
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regX = BYTE(ZeroPage(3));
 	if(m_regX == 0)
 	  m_flagZ = 1;
@@ -108,6 +128,8 @@ void C_CPU::LDX_A6(WORD opcode)//Zero_Page, 3 cycles
 void C_CPU::LDX_B6(WORD opcode)//Zero_Page Y, 4 cycles
 {
 	//load one byte of (system) memory into the Xregister
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regX = BYTE(ZeroPageY(4));
 	if(m_regX == 0)
 	  m_flagZ = 1;
@@ -118,6 +140,8 @@ void C_CPU::LDX_B6(WORD opcode)//Zero_Page Y, 4 cycles
 void C_CPU::LDX_AE(WORD opcode)//Absolute, 4 cycles
 {
 	//load one byte of (system) memory into the Xregister
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regX = BYTE(Absolute(4));
 	if(m_regX == 0)
 	  m_flagZ = 1;
@@ -128,6 +152,8 @@ void C_CPU::LDX_AE(WORD opcode)//Absolute, 4 cycles
 void C_CPU::LDX_BE(WORD opcode)//Absolute Y, 4 cycles(+1 if page crossed)
 {
 	//load one byte of (system) memory into the Xregister
+	m_flagZ = 0;
+	m_flagN = 0;
 	m_regX = BYTE(AbsoluteY(4, 1));
 	if(m_regX == 0)
 	  m_flagZ = 1;
@@ -139,6 +165,8 @@ void C_CPU::LDX_BE(WORD opcode)//Absolute Y, 4 cycles(+1 if page crossed)
 
 void C_CPU::LDY_A0(WORD opcode)//Immediate, 2 cycles
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	if(m_regY == 0)
 	  m_flagZ = 1;
 	if(m_regY == 7)
@@ -149,6 +177,8 @@ void C_CPU::LDY_A0(WORD opcode)//Immediate, 2 cycles
 
 void C_CPU::LDY_A4(WORD opcode)//Zero_Page, 3 cycles
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	if(m_regY == 0)
 	  m_flagZ = 1;
 	if(m_regY == 7)
@@ -159,6 +189,8 @@ void C_CPU::LDY_A4(WORD opcode)//Zero_Page, 3 cycles
 
 void C_CPU::LDY_B4(WORD opcode)//Zero_Page X, 4 cycles
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	if(m_regY == 0)
 	  m_flagZ = 1;
 	if(m_regY == 7)
@@ -169,6 +201,8 @@ void C_CPU::LDY_B4(WORD opcode)//Zero_Page X, 4 cycles
 
 void C_CPU::LDY_AC(WORD opcode)//Absolute, 4 cycles
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	if(m_regY == 0)
 	  m_flagZ = 1;
 	if(m_regY == 7)
@@ -179,6 +213,8 @@ void C_CPU::LDY_AC(WORD opcode)//Absolute, 4 cycles
 
 void C_CPU::LDY_BC(WORD opcode)//Absolute X, 4 cycles(+1 if page crossed)
 {
+	m_flagZ = 0;
+	m_flagN = 0;
 	if(m_regY == 0)
 	  m_flagZ = 1;
 	if(m_regY == 7)

@@ -49,7 +49,7 @@ WORD C_CPU::Absolute(int cycleCount)
 	m_cycleCount += cycleCount;
 	m_pc+= 3;
 
-	return result;
+	return systemMem[result];
 	//todo TEST
 }
 
@@ -69,7 +69,7 @@ WORD C_CPU::AbsoluteX(int cycleCount, int pagePlus)//Absolute X
 
 	m_cycleCount += cycleCount + pagePlus;
 	m_pc+= 3;
-	return result;
+	return systemMem[result];
 	//todo TEST
 }
 
@@ -90,7 +90,7 @@ WORD C_CPU::AbsoluteY(int cycleCount, int pagePlus)//Absolute Y
 	m_cycleCount += cycleCount + pagePlus;
 	m_pc+= 3;
 
-	return result;
+	return systemMem[result];
 	//todo TEST
 }
 
@@ -106,7 +106,7 @@ WORD C_CPU::IndirectX(int cycleCount)//Indirect X
 	m_cycleCount += cycleCount;
 	m_pc += 2;
 
-	return result;
+	return systemMem[result];
 	//todo TEST
 }
 
@@ -128,7 +128,7 @@ WORD C_CPU::IndirectY(int cycleCount, int pagePlus)//Indirect Y
 	m_cycleCount += cycleCount + pagePlus;
 	m_pc += 2;
 
-	return result;
+	return systemMem[result];
 	//todo TEST
 	
 }

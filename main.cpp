@@ -6,6 +6,12 @@
 using namespace std;
 int main()
 {
+	/*
+	BYTE a = 200;
+	BYTE b = a & 128;
+	char c = a + b;
+	*/
+
 	typedef char BYTE;
 	typedef unsigned short int WORD;
 	//HELPERS--------------

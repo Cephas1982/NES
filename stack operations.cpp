@@ -5,9 +5,12 @@
 void C_CPU::TSX_BA(WORD opcode)//Implied, 2 cycles
 {
 	m_regX = m_regS; //(what stack register is pointing to)
+	m_flagZ = 0;
+	m_flagN = 0;
+	
 	if(m_regX == 0)
 		m_flagZ = 1;
-	if(m_regX > 127)
+	if((m_regX & 128) == 128)
 		m_flagN = 1;
 
 	m_cycleCount+= 2;
