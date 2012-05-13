@@ -2,6 +2,7 @@
 #define CPU_H
 #define HEADER 16 //header size in bytes
 #include <iostream>
+#include <vector>
 typedef unsigned short int WORD;
 typedef unsigned char BYTE;
 
@@ -9,6 +10,7 @@ typedef unsigned char BYTE;
 class C_CPU{
 
 private:
+	int count; //track for debugging
 	//CPU-----------------------------------------------------------------------------
 	int m_cycleCount;//track clock cycles
 	WORD m_pc;//program counter - Pointer to track where to read from____
@@ -16,6 +18,7 @@ private:
 	BYTE m_regA, m_regX, m_regY, m_regS; //Accumulator register -128 to 127, x register, y register, stack register(0-255 no overflow)
 	//Carry, Zero, Interrupt Disable, Decimal Mode, Break cmd, Overflow, Negative
 	bool m_flagC, m_flagZ, m_flagI, m_flagD, m_flagB, m_flagV, m_flagN;
+	std::vector<WORD> v_stack;//this handles push/pop for stack purposes
 
 	//MEMORY-------------------------
 	BYTE header[16];
@@ -30,16 +33,16 @@ public:
 	void GetNextCode();
 	void ProcessOpcode(WORD);
 
-	//Address modes
+	//Address modes ---- these functions return the next memory address
 	BYTE ZeroPage(int cycleCount);
-	BYTE ZeroPageX(int cycleCount);
-	BYTE ZeroPageY(int cycleCount);
-	BYTE Absolute(int cycleCount);
-	BYTE AbsoluteX(int cycleCount, int extra_cycles_if_page_crossed = 0);
-	BYTE AbsoluteY(int cycleCount, int extra_cycles_if_page_crossed = 0);
-	BYTE IndirectX(int cycleCount);
-	BYTE IndirectY(int cycleCount, int extra_cycles_if_page_crossed = 0);
-	BYTE Immediate(int cycleCount);
+	WORD ZeroPageX(int cycleCount);
+	WORD ZeroPageY(int cycleCount);
+	WORD Absolute(int cycleCount);
+	WORD AbsoluteX(int cycleCount, int extra_cycles_if_page_crossed = 0);
+	WORD AbsoluteY(int cycleCount, int extra_cycles_if_page_crossed = 0);
+	WORD IndirectX(int cycleCount);
+	WORD IndirectY(int cycleCount, int extra_cycles_if_page_crossed = 0);
+	WORD Immediate(int cycleCount);
 
 
 
@@ -116,7 +119,15 @@ public:
 	void CMP_D9(WORD);
 	void CMP_C1(WORD);
 	void CMP_D1(WORD);
-	//CPX
+	
+	void CPX_E0(WORD);
+	void CPX_E4(WORD);
+	void CPX_EC(WORD);
+
+	void CPY_C0(WORD);
+	void CPY_C4(WORD);
+	void CPY_CC(WORD);
+
 	//CPY
 	//Increment and decrement operations-------------
 	void INC_E6(WORD);
@@ -134,5 +145,42 @@ public:
 
 	void DEX_CA(WORD);
 	void DEY_88(WORD);
+	//Jump and call operations---------------
+	void JMP_4C(WORD);
+	void JMP_6C(WORD);
+
+	void JSR_20(WORD);
+	void RTS_60(WORD);
+	//Logical operations----------------------
+	void AND_29(WORD);
+	void AND_25(WORD);
+	void AND_35(WORD);
+	void AND_2D(WORD);
+	void AND_3D(WORD);
+	void AND_39(WORD);
+	void AND_21(WORD);
+	void AND_31(WORD);
+
+	void EOR_49(WORD);
+	void EOR_45(WORD);
+	void EOR_55(WORD);
+	void EOR_4D(WORD);
+	void EOR_5D(WORD);
+	void EOR_59(WORD);
+	void EOR_41(WORD);
+	void EOR_51(WORD);
+
+	void ORA_09(WORD);
+	void ORA_05(WORD);
+	void ORA_15(WORD);
+	void ORA_0D(WORD);
+	void ORA_1D(WORD);
+	void ORA_19(WORD);
+	void ORA_01(WORD);
+	void ORA_11(WORD);
+
+	void BIT_24(WORD);
+	void BIT_2C(WORD);
+
 };
 #endif

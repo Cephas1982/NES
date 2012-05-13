@@ -78,7 +78,9 @@
     <ClCompile Include="branch operations.cpp" />
     <ClCompile Include="CPU.cpp" />
     <ClCompile Include="inc_and_dec_ops.cpp" />
+    <ClCompile Include="jump_and_call_ops.cpp" />
     <ClCompile Include="load_and_store.cpp" />
+    <ClCompile Include="logical_ops.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="address_modes.cpp" />
     <ClCompile Include="stack operations.cpp" />

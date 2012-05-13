@@ -17,6 +17,8 @@ C_CPU::C_CPU()
 	m_regA = 0;
 	m_regX = 0;
 	m_regY = 0;
+
+	count = 0;
 }
 
 C_CPU::~C_CPU()
@@ -28,9 +30,9 @@ C_CPU::~C_CPU()
 void C_CPU::GetNextCode()
 {
 	WORD opcode = systemMem[m_pc] & 0x00FF;
-	printf("parsing opcode:  %#X  ", opcode); printf("   programCounter:  %#X  \n", m_pc);
+	printf("count: %d  ", count++);printf("parsing opcode:  %#X  ", opcode); printf("   programCounter:  %#X  \n", m_pc);
 //	system("pause");
-	ProcessOpcode(opcode);
+		ProcessOpcode(opcode);
 
 
 }
@@ -127,10 +129,10 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0xAC: LDY_AC(opcode); break;
 	case 0xBC: LDY_BC(opcode); break;
 
-	//In case of STA - Store Accumulator opcodes
+	*///In case of STA - Store Accumulator opcodes
 	case 0x85: STA_85(opcode); break;
-	case 0x95: STA_95(opcode); break;  */
-	case 0x8D: STA_8D(opcode); break; /*
+	case 0x95: STA_95(opcode); break;  
+	case 0x8D: STA_8D(opcode); break; 
 	case 0x9D: STA_9D(opcode); break;
 	case 0x99: STA_99(opcode); break;
 	case 0x81: STA_81(opcode); break;
@@ -142,9 +144,9 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0x8E: STX_8E(opcode); break;
 
 	//In case of STY - Store Y register
-	case 0x84: STX_84(opcode); break;
-	case 0x94: STX_94(opcode); break;
-	case 0x8C: STX_8C(opcode); break;
+	case 0x84: STY_84(opcode); break;
+	case 0x94: STY_94(opcode); break;
+	case 0x8C: STY_8C(opcode); break;
 
 	/*** Register transfers --------------------------------
 	//In case of TAX - Transfer accumulator to X
@@ -179,7 +181,7 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0x28: PLP_28(opcode); break;
 
 	/*** Logical operations --------------------------------
-	//In case of AND - Logical AND
+*/	//In case of AND - Logical AND
 	case 0x29: AND_29(opcode); break;
 	case 0x25: AND_25(opcode); break;
 	case 0x35: AND_35(opcode); break;
@@ -200,16 +202,16 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0x51: EOR_51(opcode); break;
 
 	//In case of ORA - Logical inclusive 
-	case 0x09: ORA_49(opcode); break;
-	case 0x05: ORA_45(opcode); break;
-	case 0x15: ORA_55(opcode); break;
-	case 0x0D: ORA_4D(opcode); break;
-	case 0x1D: ORA_5D(opcode); break;
-	case 0x19: ORA_59(opcode); break;
-	case 0x01: ORA_41(opcode); break;
-	case 0x11: ORA_51(opcode); break;
+	case 0x09: ORA_09(opcode); break;
+	case 0x05: ORA_05(opcode); break;
+	case 0x15: ORA_05(opcode); break;
+	case 0x0D: ORA_0D(opcode); break;
+	case 0x1D: ORA_1D(opcode); break;
+	case 0x19: ORA_19(opcode); break;
+	case 0x01: ORA_01(opcode); break;
+	case 0x11: ORA_11(opcode); break;
 
-	//In case of BIT - Bit test ****TODO FIX THIS
+	//In case of BIT - Bit test 
 	case 0x24: BIT_24(opcode); break;
 	case 0x2C: BIT_2C(opcode); break;
 
@@ -244,7 +246,7 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0xD9: CMP_D9(opcode); break;
 	case 0xC1: CMP_C1(opcode); break;
 	case 0xD1: CMP_D1(opcode); break;
-/*
+
 	//In case of CPX - Compare X register
 	case 0xE0: CPX_E0(opcode); break;
 	case 0xE4: CPX_E4(opcode); break;
@@ -313,10 +315,10 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0x7E: ROR_7E(opcode); break;
 
 
-	/*** Jumps and Calls--------------------------------
+	/*** Jumps and Calls-------------------------------- */
 	//In case of JMP - Jump to another location
-	case 0x4C: JMP_4C(opcode); break;
-	case 0x4C: JMP_6C(opcode); break;
+//	case 0x4C: JMP_4C(opcode); break;
+//	case 0x6C: JMP_6C(opcode); break;
 
 	//In case of JSR - Jump to a subroutine
 	case 0x20: JSR_20(opcode); break;

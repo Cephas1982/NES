@@ -45,6 +45,12 @@
     <ClCompile Include="inc_and_dec_ops.cpp">
       <Filter>opcode functions</Filter>
     </ClCompile>
+    <ClCompile Include="jump_and_call_ops.cpp">
+      <Filter>opcode functions</Filter>
+    </ClCompile>
+    <ClCompile Include="logical_ops.cpp">
+      <Filter>opcode functions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPU.h">

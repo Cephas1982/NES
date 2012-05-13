@@ -11,7 +11,7 @@ void C_CPU::INC_E6(WORD opcode)//Zero_page, 5 cycles
 	systemMem[m_pc + 1] += 1;
 
 	//get result using zero page
-	BYTE result = ZeroPage(5);
+	BYTE result = systemMem[ZeroPage(5)];
 
 	//Set Z
 	if(result  == 0)
@@ -28,7 +28,7 @@ void C_CPU::INC_F6(WORD opcode)//Zero_page X, 6 cycles
 	systemMem[m_pc + 1 + m_regX] += 1;
 
 	//get the result
-	BYTE result = ZeroPageX(6);
+	BYTE result = systemMem[ZeroPageX(6)];
 
 	//Set Z
 	if(result  == 0)
@@ -49,7 +49,7 @@ void C_CPU::INC_EE(WORD opcode)//Absolute, 6 cycles
 	systemMem[ZZ] += 1;
 
 	//get the result
-	BYTE result = Absolute(6);
+	BYTE result = systemMem[Absolute(6)];
 
 	//Set Z
 	if(result  == 0)
@@ -70,7 +70,7 @@ void C_CPU::INC_FE(WORD opcode)//Absolute X, 7 cycles
 	systemMem[ZZ] += 1;
 
 	//get the result
-	BYTE result = AbsoluteX(7);
+	BYTE result = systemMem[AbsoluteX(7)];
 
 	//Set Z
 	if(result  == 0)
@@ -108,7 +108,7 @@ void C_CPU::INY_C8(WORD opcode)//Implied, 2 cycles
 	  m_flagZ = 1;
 
 	//set N
-		if((m_regY & 128) == 128)
+	if((m_regY & 128) == 128)
 	  m_flagN = 1;
 
 	m_cycleCount += 2;
@@ -123,7 +123,7 @@ void C_CPU::DEC_C6(WORD opcode)//Zero_page, 5 cycles
 	systemMem[m_pc + 1] -= 1;
 
 	//get result using zero page
-	BYTE result = ZeroPage(5);
+	BYTE result = systemMem[ZeroPage(5)];
 
 	//Set Z
 	if(result  == 0)
@@ -140,7 +140,7 @@ void C_CPU::DEC_D6(WORD opcode)//Zero_page X, 6 cycles
 	systemMem[m_pc + 1 + m_regX] -= 1;
 
 	//get the result
-	BYTE result = ZeroPageX(6);
+	BYTE result = systemMem[ZeroPageX(6)];
 
 	//Set Z
 	if(result  == 0)
@@ -161,7 +161,7 @@ void C_CPU::DEC_CE(WORD opcode)//Absolute, 6 cycles
 	systemMem[ZZ] -= 1;
 
 	//get the result
-	BYTE result = Absolute(6);
+	BYTE result = systemMem[Absolute(6)];
 
 	//Set Z
 	if(result  == 0)
@@ -182,7 +182,7 @@ void C_CPU::DEC_DE(WORD opcode)//Absolute X, 7 cycles
 	systemMem[ZZ] -= 1;
 
 	//get the result
-	BYTE result = AbsoluteX(7);
+	BYTE result = systemMem[AbsoluteX(7)];
 
 	//Set Z
 	if(result  == 0)

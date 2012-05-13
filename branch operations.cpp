@@ -6,7 +6,7 @@ void C_CPU::BCC_90(WORD opcode)//Relative, 2(+1 if branch succeeds, +2 if to a n
 //If the carry flag is clear then add the relative displacement to the
 //program counter to cause a branch to a new location.
 
-	//TODO:  test
+	//TODO:  REWRITE???
 	WORD before = m_pc & 0xFF00;//page before addition
 
 	if(m_flagC == 0){
