@@ -3,20 +3,17 @@
 #include "CPU.h"
 
 //***************** JMP FUNCTIONS******************************************
-/*
+
 void C_CPU::JMP_4C(WORD opcode)//Absolute, 3 cycles
 {
-	//programCounter = operandAddress; 
-	//TODO: pass operandAddress to this function?
-
+	m_pc = Absolute(3); //jump to return address of Absolute(3)
 }
 
 void C_CPU::JMP_6C(WORD opcode)//Indirect, 5 cycles
 {
-	//programCounter = operandAddress; 
-	//TODO: pass operandAddress to this function?
+	m_pc = Indirect(5);
 }
-*/
+
 /*
 TODO?? FYI: 
 NB:
@@ -31,7 +28,7 @@ indirect vector is not at the end of the page.
 void C_CPU::JSR_20(WORD opcode)//Absolute, 6 cycles
 {
 	WORD result = Absolute(6);
-	v_stack.push_back(m_pc);//push back program counter (-1) to stack
+	v_stack.push_back(m_pc -1);//push back program counter (-1) to stack
 	m_pc = result; //JUMP to new address
 }
 
@@ -42,7 +39,7 @@ void C_CPU::RTS_60(WORD opcode)//Implied, 6 cycles
 	//pulls program counter --- not advancing b/c it is implied (pc+1) and 
 	//$60 requires pc-1
 	
-	m_pc = v_stack.back();
+	m_pc = v_stack.back() -1;
 	v_stack.pop_back();
 	int a = 0;
 

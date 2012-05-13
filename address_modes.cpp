@@ -10,7 +10,7 @@ BYTE C_CPU::ZeroPage(int cycleCount)
 	m_cycleCount += cycleCount;
 	m_pc+= 2;
 
-	return result;
+	return BYTE(result);
 	//todo TEST
 }
 
@@ -89,6 +89,26 @@ WORD C_CPU::AbsoluteY(int cycleCount, int pagePlus)//Absolute Y
 
 	m_cycleCount += cycleCount + pagePlus;
 	m_pc+= 3;
+
+	return result;
+	//todo TEST
+}
+
+WORD C_CPU::Indirect(int cycleCount)//Indirect X
+{
+	//stores accumulator in memory.
+	WORD BB = systemMem[m_pc + 1];
+	WORD CC = systemMem[m_pc + 2];
+	CC <<= 8;
+	WORD CCBB = (CC | BB);
+
+	WORD XX = CCBB;
+	WORD YY = CCBB + 1;	
+	YY <<= 8;
+	WORD result = (YY | XX);// 0xYYXX
+	
+	m_cycleCount += cycleCount;
+	m_pc += 3;
 
 	return result;
 	//todo TEST

@@ -40,6 +40,7 @@ public:
 	WORD Absolute(int cycleCount);
 	WORD AbsoluteX(int cycleCount, int extra_cycles_if_page_crossed = 0);
 	WORD AbsoluteY(int cycleCount, int extra_cycles_if_page_crossed = 0);
+	WORD Indirect(int cycleCount);
 	WORD IndirectX(int cycleCount);
 	WORD IndirectY(int cycleCount, int extra_cycles_if_page_crossed = 0);
 	WORD Immediate(int cycleCount);
@@ -181,6 +182,11 @@ public:
 
 	void BIT_24(WORD);
 	void BIT_2C(WORD);
+	//Register transfers------------------
+	void TAX_AA(WORD);
+	void TAY_A8(WORD);
+	void TXA_8A(WORD);
+	void TYA_98(WORD);
 
 };
 #endif

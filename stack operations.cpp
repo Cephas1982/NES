@@ -2,27 +2,27 @@
 #define STACK_OPERATIONS_CPP
 #include "CPU.h"
 /*************** STACK OPERATION FUNCTIONS ************************/
+/*************** TSX FUNCTIONS ************************/
 void C_CPU::TSX_BA(WORD opcode)//Implied, 2 cycles
 {
-	m_regX = m_regS; //(what stack register is pointing to)
-	m_flagZ = 0;
-	m_flagN = 0;
-	
+	m_regX = m_regS;
+
 	if(m_regX == 0)
-		m_flagZ = 1;
+	  m_flagZ = 1;
+
 	if((m_regX & 128) == 128)
-		m_flagN = 1;
+	  m_flagN = 1;
 
-	m_cycleCount+= 2;
-	m_pc++;
+	m_cycleCount += 2;
+	m_pc ++;	
 }
-
+/*************** TXS FUNCTIONS ************************/
 void C_CPU::TXS_9A(WORD opcode)//Implied, 2 cycles
 {
-	m_regS = m_regX; //(what stack register is pointing to)
+	m_regS = m_regX;
 
-	m_cycleCount+=2;
-	m_pc++;
+	m_cycleCount += 2;
+	m_pc ++;
 }
 /*
 void C_CPU::PHA_48(WORD opcode)//Implied, 3 cycles

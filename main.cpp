@@ -7,8 +7,8 @@ using namespace std;
 int main()
 {
 	/*
-	BYTE a = 200;
-	BYTE b = a & 128;
+	WORD a = 0xABCD;
+	BYTE b = a;
 	char c = a + b;
 	*/
 

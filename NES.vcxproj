@@ -83,6 +83,7 @@
     <ClCompile Include="logical_ops.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="address_modes.cpp" />
+    <ClCompile Include="register_transfer_opc.cpp" />
     <ClCompile Include="stack operations.cpp" />
     <ClCompile Include="statusFlag.cpp" />
   </ItemGroup>

@@ -51,6 +51,9 @@
     <ClCompile Include="logical_ops.cpp">
       <Filter>opcode functions</Filter>
     </ClCompile>
+    <ClCompile Include="register_transfer_opc.cpp">
+      <Filter>opcode functions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPU.h">

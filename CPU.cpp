@@ -148,23 +148,23 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0x94: STY_94(opcode); break;
 	case 0x8C: STY_8C(opcode); break;
 
-	/*** Register transfers --------------------------------
+	/*** Register transfers --------------------------------*/
 	//In case of TAX - Transfer accumulator to X
 	case 0xAA: TAX_AA(opcode); break;
 
 	//In case of TAY - Transfer accumulator to Y
-	case 0xA8: TAX_A8(opcode); break;
+	case 0xA8: TAY_A8(opcode); break;
 
 	//In case of TXA - Transfer X to accumulator
-	case 0x8A: TAX_8A(opcode); break;
+	case 0x8A: TXA_8A(opcode); break;
 
 	//In case of TYA - Transfer Y to accumulator
-	case 0x98: TAX_98(opcode); break;
+	case 0x98: TYA_98(opcode); break;
 
-	/*** Stack Operations --------------------------------
+	/*** Stack Operations --------------------------------*/
 	//In case of TSX - Transfer stack pointer to X
 	case 0xBA: TSX_BA(opcode); break;
-	*/
+	
 	//In case of TXS - Transfer X to stack pointer
 	case 0x9A: TXS_9A(opcode); break;
 	/*
@@ -317,8 +317,8 @@ void C_CPU::ProcessOpcode(WORD opcode)
 
 	/*** Jumps and Calls-------------------------------- */
 	//In case of JMP - Jump to another location
-//	case 0x4C: JMP_4C(opcode); break;
-//	case 0x6C: JMP_6C(opcode); break;
+	case 0x4C: JMP_4C(opcode); break;
+	case 0x6C: JMP_6C(opcode); break;
 
 	//In case of JSR - Jump to a subroutine
 	case 0x20: JSR_20(opcode); break;
