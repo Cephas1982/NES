@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CPU_CPP
 #define CPU_CPP
 
@@ -30,7 +31,14 @@ C_CPU::~C_CPU()
 void C_CPU::GetNextCode()
 {
 	WORD opcode = systemMem[m_pc] & 0x00FF;
-	printf("count: %d  ", count++);printf("parsing opcode:  %#X  ", opcode); printf("   programCounter:  %#X  \n", m_pc);
+	printf("count: %d ", count++);
+	printf("parsing opcode: %#X ", opcode); 
+	printf("PC:  %#X ", m_pc);
+	printf("A: %d ", m_regA);
+	printf("X: %d ", m_regX);
+	printf("Y: %d ", m_regY);
+	printf("P: bools ");
+	printf("SP: %#X \n", m_regS);
 //	system("pause");
 		ProcessOpcode(opcode);
 
@@ -42,7 +50,7 @@ void C_CPU::RESET()
 	//load game
 	FILE *infile;
 
-	infile = fopen("roms/smb.nes", "rb");
+	infile = fopen("roms/nestest.nes", "rb");
 	
 	
 	//load rom header
@@ -80,8 +88,13 @@ void C_CPU::RESET()
 	//0x4000 = 16KB
 	//LOAD PROGRAM ROM
 	memcpy(&systemMem[0x8000], gameMemory + HEADER, 0x4000*2 ); //copy 16KB *2  b/c there are 2 prg rom banks
+	//rigged up b/c it's only 1 bank that needs to be duplicated at 0xc000
+	memcpy(&systemMem[0xC000], gameMemory + HEADER, 0x4000*2 ); //copy 16KB *2  b/c there are 2 prg rom banks
+
+
 	//LOAD VIDEO ROM
-	memcpy(&ppuMem[0x0000], gameMemory + 0x4000 * 2 + HEADER, 0x2000); //copy 8KB of video rom to the ppu
+	//memcpy(&ppuMem[0x0000], gameMemory + 0x4000 * 2 + HEADER, 0x2000); //copy 8KB of video rom to the ppu
+	memcpy(&ppuMem[0x0000], gameMemory + 0x4000 * 1 + HEADER, 0x2000); //copy 8KB of video rom to the ppu
 
 	//RESET VECTOR IS  $FFFC/$FFFD
 	WORD first = systemMem[0xFFFC];
@@ -92,7 +105,8 @@ void C_CPU::RESET()
 
 
 	//SET STUFF
-	m_pc = resetVector;
+	resetVector = 0XC000;//FOR NESTEST rom onry
+	m_pc = resetVector;	
 	WORD opcode = systemMem[resetVector];
 
 	//ProcessOpcode(opcode);
