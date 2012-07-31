@@ -15,10 +15,25 @@ private:
 	int m_cycleCount;//track clock cycles
 	WORD m_pc;//program counter - Pointer to track where to read from____
 	//stackPointer TODO <- this
-	BYTE m_regA, m_regX, m_regY, m_regS; //Accumulator register -128 to 127, x register, y register, stack register(0-255 no overflow)
+	BYTE m_regA, m_regX, m_regY;  //Accumulator register -128 to 127, x register, y register
+	WORD m_regS; //stack register --- made 16bit so it's easier
+	std::vector<WORD>v_stack;
 	//Carry, Zero, Interrupt Disable, Decimal Mode, Break cmd, Overflow, Negative
 	bool m_flagC, m_flagZ, m_flagI, m_flagD, m_flagB, m_flagV, m_flagN;
-	std::vector<WORD> v_stack;//this handles push/pop for stack purposes
+	bool m_stackFlagC, m_stackFlagZ, m_stackFlagI, m_stackFlagD, m_stackFlagB, m_stackFlagV, m_stackFlagN;
+
+
+	//need to improve below
+	BYTE pStatus;
+	#define fC  0x1;
+	#define fZ  0x2;
+	#define fI  0x4;
+	#define fD  0x8;
+	#define fB  0x10;
+	#define fNULL  0x20;
+	#define fV  0x40;
+	#define fN  0x80;
+	//std::vector<WORD> v_stack;//this handles push/pop for stack purposes
 
 	//MEMORY-------------------------
 	BYTE header[16];
@@ -34,7 +49,7 @@ public:
 	void ProcessOpcode(WORD);
 
 	//Address modes ---- these functions return the next memory address
-	BYTE ZeroPage(int cycleCount);
+	WORD ZeroPage(int cycleCount);
 	WORD ZeroPageX(int cycleCount);
 	WORD ZeroPageY(int cycleCount);
 	WORD Absolute(int cycleCount);
@@ -187,6 +202,12 @@ public:
 	void TAY_A8(WORD);
 	void TXA_8A(WORD);
 	void TYA_98(WORD);
+
+
+	// System functions
+	void BRK_00(WORD);
+	void NOP_EA(WORD);
+	void RTI_40(WORD);
 
 };
 #endif

@@ -8,9 +8,13 @@ void C_CPU::LDA_A9(WORD opcode)//Immediate, 2 cycles
 	m_regA = systemMem[Immediate(2)];
 	if(m_regA == 0)
 	  m_flagZ = 1;
+	else
+	  m_flagZ = 0;
 
-	if((m_regA & 128) == 128)
+	if(m_regA & 0x80 == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::LDA_A5(WORD opcode)//Zero_Page, 3 cycles
@@ -18,9 +22,13 @@ void C_CPU::LDA_A5(WORD opcode)//Zero_Page, 3 cycles
 	m_regA = systemMem[ZeroPage(3)];
 	if(m_regA == 0)
 	  m_flagZ = 1;
+	else
+	  m_flagZ = 0;
 
-	if((m_regA & 128) == 128)
+	if(m_regA & 0x80 == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::LDA_B5(WORD opcode)//Zero_Page X, 4 cycles
@@ -28,9 +36,13 @@ void C_CPU::LDA_B5(WORD opcode)//Zero_Page X, 4 cycles
 	m_regA = systemMem[ZeroPageX(4)];
 	if(m_regA == 0)
 	  m_flagZ = 1;
+	else
+	  m_flagZ = 0;
 
-	if((m_regA & 128) == 128)
+	if(m_regA & 0x80 == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::LDA_AD(WORD opcode)//Absolute, 4 cycles
@@ -38,9 +50,13 @@ void C_CPU::LDA_AD(WORD opcode)//Absolute, 4 cycles
 	m_regA = systemMem[Absolute(4)];
 	if(m_regA == 0)
 	  m_flagZ = 1;
+	else
+	  m_flagZ = 0;
 
-	if((m_regA & 128) == 128)
+	if(m_regA & 0x80 == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::LDA_BD(WORD opcode)//Absolute X, 4 cycles (+1 if page crossed)
@@ -50,9 +66,13 @@ void C_CPU::LDA_BD(WORD opcode)//Absolute X, 4 cycles (+1 if page crossed)
 	m_regA = systemMem[AbsoluteX(4, 1)];
 	if(m_regA == 0)
 	  m_flagZ = 1;
+	else
+	  m_flagZ = 0;
 
-	if((m_regA & 128) == 128)
+	if(m_regA & 0x80 == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 	//check if page crossed
 	if((m_pc & 0xFF00) != before)
@@ -66,9 +86,13 @@ void C_CPU::LDA_B9(WORD opcode)//Absolute Y, 4 cycles (+1 if page crossed)
 	m_regA = systemMem[AbsoluteY(4, 1)];
 	if(m_regA == 0)
 	  m_flagZ = 1;
+	else
+	  m_flagZ = 0;
 
-	if((m_regA & 128) == 128)
+	if(m_regA & 0x80 == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 	//check if page crossed
 	if((m_pc & 0xFF00) != before)
@@ -80,9 +104,13 @@ void C_CPU::LDA_A1(WORD opcode)//(Indirect X), 6 cycles //indexed indrect
 	m_regA = systemMem[IndirectX(6)];
 	if(m_regA == 0)
 	  m_flagZ = 1;
+	else
+	  m_flagZ = 0;
 
-	if((m_regA & 128) == 128)
+	if(m_regA & 0x80 == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::LDA_B1(WORD opcode)//(Indirect)Y, 5 cycles(+1 if page crossed)//indirect Indexed
@@ -92,9 +120,13 @@ void C_CPU::LDA_B1(WORD opcode)//(Indirect)Y, 5 cycles(+1 if page crossed)//indi
 	m_regA = systemMem[IndirectY(5, 1)];
 	if(m_regA == 0)
 	  m_flagZ = 1;
+	else
+	  m_flagZ = 0;
 
-	if((m_regA & 128) == 128)
+	if(m_regA & 0x80 == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 	//check if page crossed
 	if((m_pc & 0xFF00) != before)
@@ -109,8 +141,13 @@ void C_CPU::LDX_A2(WORD opcode)//Immediate, 2 cycles
 	m_regX = systemMem[Immediate(2)];
 	if(m_regX == 0)
 	  m_flagZ = 1;
-	if((m_regX & 128) == 128)//if byte 7 is set, flagN should also be set
+	else
+	  m_flagZ = 0;
+
+	if(m_regA & 0x80 == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 /*
 void C_CPU::LDX_A6(WORD opcode)//Zero_Page, 3 cycles
@@ -169,8 +206,13 @@ void C_CPU::LDY_A0(WORD opcode)//Immediate, 2 cycles
 
 	if(m_regY == 0)
 	  m_flagZ = 1;
-	if((m_regY & 128) == 128)
+	else
+	  m_flagZ = 0;
+
+	if(m_regY  & 0x80 == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 /*
 void C_CPU::LDY_A4(WORD opcode)//Zero_Page, 3 cycles

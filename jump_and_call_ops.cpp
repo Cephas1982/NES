@@ -26,9 +26,11 @@ indirect vector is not at the end of the page.
 
 //***************** JSR FUNCTIONS******************************************
 void C_CPU::JSR_20(WORD opcode)//Absolute, 6 cycles
-{
+{	
 	WORD result = Absolute(6);
-	v_stack.push_back(m_pc -1);//push back program counter (-1) to stack
+	//m_regS = m_pc;//push address to stack
+
+	v_stack.push_back(m_pc);//push back program counter
 	m_pc = result; //JUMP to new address
 }
 
@@ -39,9 +41,10 @@ void C_CPU::RTS_60(WORD opcode)//Implied, 6 cycles
 	//pulls program counter --- not advancing b/c it is implied (pc+1) and 
 	//$60 requires pc-1
 	
-	m_pc = v_stack.back() -1;
-	v_stack.pop_back();
-	int a = 0;
+	//m_pc = m_regS;
 
+	//old
+	m_pc = v_stack.back();
+	v_stack.pop_back();
 }
 #endif

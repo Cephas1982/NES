@@ -2,7 +2,7 @@
 #define ADDRESS_MODES
 #include "CPU.h"
 
-BYTE C_CPU::ZeroPage(int cycleCount)
+WORD C_CPU::ZeroPage(int cycleCount)
 {
 	//get result using zero page
 	WORD result = m_pc + 1;
@@ -10,7 +10,9 @@ BYTE C_CPU::ZeroPage(int cycleCount)
 	m_cycleCount += cycleCount;
 	m_pc+= 2;
 
-	return BYTE(result);
+
+
+	return WORD(result);
 	//todo TEST
 }
 

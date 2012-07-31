@@ -327,16 +327,16 @@ void C_CPU::BIT_24(WORD opcode)//Zero_page, 3 cycles
 	if(result == 0)
 	  m_flagZ = 1;
 	
-	//set flagV to bit 6 of memory TODO: make this faster
-	if((mem & 64) == 64)//if it is set
-		m_flagV = 1;
+	//TODO MAJOR FIX THIS--- to bit of mem val
+	if(result == 0)
+		m_flagV = false;
 	else
-		m_flagV = 0;
+		m_flagV = true;
 
-	if((mem & 128) == 128)//if it is set
-		m_flagN = 1;
+	if(result == 0)
+		m_flagN = false;
 	else
-		m_flagN = 0;
+		m_flagN = true;
 }
 
 void C_CPU::BIT_2C(WORD opcode)//Absolute, 4 cycles
@@ -346,17 +346,16 @@ void C_CPU::BIT_2C(WORD opcode)//Absolute, 4 cycles
 
 	if(result == 0)
 	  m_flagZ = 1;
-	
-	//set flagV to bit 6 of memory TODO: make this faster
-	if((mem & 64) == 64)//if it is set
-		m_flagV = 1;
+		
+	if(result == 0)
+		m_flagV = false;
 	else
-		m_flagV = 0;
+		m_flagV = true;
 
-	if((mem & 128) == 128)//if it is set
-		m_flagN = 1;
+	if(result == 0)
+		m_flagN = false;
 	else
-		m_flagN = 0;
+		m_flagN = true;
 }
 
 #endif

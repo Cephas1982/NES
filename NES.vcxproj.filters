@@ -54,10 +54,21 @@
     <ClCompile Include="register_transfer_opc.cpp">
       <Filter>opcode functions</Filter>
     </ClCompile>
+    <ClCompile Include="system_functions.cpp">
+      <Filter>opcode functions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPU.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="NES.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

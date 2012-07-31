@@ -1,4 +1,3 @@
-#pragma once
 #ifndef CPU_CPP
 #define CPU_CPP
 
@@ -9,17 +8,27 @@ C_CPU::C_CPU()
 	//temp set stuff... todo: move to reset function?
 	m_flagC = false;
 	m_flagZ = false; 
-	m_flagI = false;
+	m_flagI = true;//Don't know why this is true on init yet. Still debugging
 	m_flagD = false;
 	m_flagB = false;
 	m_flagV = false;
 	m_flagN = false;
+
+	m_stackFlagC = false;
+	m_stackFlagZ = false; 
+	m_stackFlagI = false;
+	m_stackFlagD = false;
+	m_stackFlagB = false;
+	m_stackFlagV = false;
+	m_stackFlagN = false;
 
 	m_regA = 0;
 	m_regX = 0;
 	m_regY = 0;
 
 	count = 0;
+
+	
 }
 
 C_CPU::~C_CPU()
@@ -30,19 +39,36 @@ C_CPU::~C_CPU()
 
 void C_CPU::GetNextCode()
 {
+	//flag status
+	pStatus = 0;
+
+	pStatus |= fNULL;
+	if(m_flagC)
+		pStatus |= fC;
+	if(m_flagZ)
+		pStatus |= fZ;
+	if(m_flagI)
+		pStatus |= fI;
+	if(m_flagD)
+		pStatus |= fD;
+	if(m_flagB)
+		pStatus |= fB;
+	if(m_flagV)
+		pStatus |= fV;
+	if(m_flagN)
+		pStatus |= fN;
+
 	WORD opcode = systemMem[m_pc] & 0x00FF;
 	printf("count: %d ", count++);
-	printf("parsing opcode: %#X ", opcode); 
 	printf("PC:  %#X ", m_pc);
-	printf("A: %d ", m_regA);
-	printf("X: %d ", m_regX);
-	printf("Y: %d ", m_regY);
-	printf("P: bools ");
-	printf("SP: %#X \n", m_regS);
-//	system("pause");
+	printf("opcode: %#X ", opcode); 
+	printf("A: %#x ", m_regA);
+	printf("X: %#x ", m_regX);
+	printf("Y: %#x ", m_regY);
+	printf("P: %#x ", pStatus);
+	printf("SP: %#x \n", m_regS);
+	//system("pause");
 		ProcessOpcode(opcode);
-
-
 }
 
 void C_CPU::RESET()
@@ -181,12 +207,12 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	
 	//In case of TXS - Transfer X to stack pointer
 	case 0x9A: TXS_9A(opcode); break;
-	/*
+	
 	//In case of PHA - Push accumulator on stack
 	case 0x48: PHA_48(opcode); break;
 
 	//In case of PHP - Push processor status on accumulator
-	case 0x08: PHA_08(opcode); break;
+	case 0x08: PHP_08(opcode); break;
 
 	//In case of PLA - Pull accumulator from stack
 	case 0x68: PLA_68(opcode); break;
@@ -194,7 +220,7 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	//In case of PLP - Pull processor status from stack
 	case 0x28: PLP_28(opcode); break;
 
-	/*** Logical operations --------------------------------
+/*	/*** Logical operations --------------------------------
 */	//In case of AND - Logical AND
 	case 0x29: AND_29(opcode); break;
 	case 0x25: AND_25(opcode); break;
@@ -389,7 +415,7 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	case 0X78: SEI_78(opcode); break;
 
 	
-	/*** System Functions --------------------------------
+	// System Functions --------------------------------
 	//In case of BRK - Force an interrupt
 	case 0x00: BRK_00(opcode); break;
 
@@ -399,7 +425,7 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	//In case of RTI - Force an interrupt
 	case 0x40: RTI_40(opcode); break;
 
-	*/
+	
 	default: printf("opcode |  %#X  | not found! \n", opcode);
 				system("pause");
 				return;
