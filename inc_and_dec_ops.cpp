@@ -18,7 +18,7 @@ void C_CPU::INC_E6(WORD opcode)//Zero_page, 5 cycles
 	  m_flagZ = 1;
 
 	//set N
-	if(result & 0x80 == 0x80)
+	if((result & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -60,7 +60,7 @@ void C_CPU::INC_EE(WORD opcode)//Absolute, 6 cycles
 	  m_flagZ = 1;
 
 	//set N
-	if(result & 0x80 == 0x80)
+	if((result & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -83,7 +83,7 @@ void C_CPU::INC_FE(WORD opcode)//Absolute X, 7 cycles
 	  m_flagZ = 1;
 
 	//set N
-	if(result & 0x80 == 0x80)
+	if((result & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -144,7 +144,7 @@ void C_CPU::DEC_C6(WORD opcode)//Zero_page, 5 cycles
 	  m_flagZ = 1;
 
 	//set N
-	if(result & 0x80 == 0x80)
+	if((result & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -164,7 +164,7 @@ void C_CPU::DEC_D6(WORD opcode)//Zero_page X, 6 cycles
 	  m_flagZ = 1;
 
 	//set N
-	if(result & 0x80 == 0x80)
+	if((result & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -188,7 +188,7 @@ void C_CPU::DEC_CE(WORD opcode)//Absolute, 6 cycles
 	  m_flagZ = 1;
 
 	//set N
-	if(result & 0x80 == 0x80)
+	if((result & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -212,7 +212,7 @@ void C_CPU::DEC_DE(WORD opcode)//Absolute X, 7 cycles
 	  m_flagZ = 1;
 
 	//set N
-	if(result & 0x80 == 0x80)
+	if((result & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;

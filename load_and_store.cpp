@@ -11,7 +11,7 @@ void C_CPU::LDA_A9(WORD opcode)//Immediate, 2 cycles
 	else
 	  m_flagZ = 0;
 
-	if(m_regA & 0x80 == 0x80)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -25,7 +25,7 @@ void C_CPU::LDA_A5(WORD opcode)//Zero_Page, 3 cycles
 	else
 	  m_flagZ = 0;
 
-	if(m_regA & 0x80 == 0x80)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -39,7 +39,7 @@ void C_CPU::LDA_B5(WORD opcode)//Zero_Page X, 4 cycles
 	else
 	  m_flagZ = 0;
 
-	if(m_regA & 0x80 == 0x80)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -53,7 +53,7 @@ void C_CPU::LDA_AD(WORD opcode)//Absolute, 4 cycles
 	else
 	  m_flagZ = 0;
 
-	if(m_regA & 0x80 == 0x80)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -69,7 +69,7 @@ void C_CPU::LDA_BD(WORD opcode)//Absolute X, 4 cycles (+1 if page crossed)
 	else
 	  m_flagZ = 0;
 
-	if(m_regA & 0x80 == 0x80)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -89,7 +89,7 @@ void C_CPU::LDA_B9(WORD opcode)//Absolute Y, 4 cycles (+1 if page crossed)
 	else
 	  m_flagZ = 0;
 
-	if(m_regA & 0x80 == 0x80)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -107,7 +107,7 @@ void C_CPU::LDA_A1(WORD opcode)//(Indirect X), 6 cycles //indexed indrect
 	else
 	  m_flagZ = 0;
 
-	if(m_regA & 0x80 == 0x80)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -123,7 +123,7 @@ void C_CPU::LDA_B1(WORD opcode)//(Indirect)Y, 5 cycles(+1 if page crossed)//indi
 	else
 	  m_flagZ = 0;
 
-	if(m_regA & 0x80 == 0x80)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -144,7 +144,7 @@ void C_CPU::LDX_A2(WORD opcode)//Immediate, 2 cycles
 	else
 	  m_flagZ = 0;
 
-	if(m_regA & 0x80 == 0x80)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
 	else
 	  m_flagN = 0;
@@ -268,14 +268,16 @@ void C_CPU::LDY_BC(WORD opcode)//Absolute X, 4 cycles(+1 if page crossed)
 /*************** STA FUNCTIONS ************************/
 void C_CPU::STA_85(WORD opcode)//Zero Page, 3 cycles
 {
+	WORD data = ZeroPage(3);
 	//stores accumulator in memory.
-	systemMem[ZeroPage(3)] = m_regA;
+	systemMem[data] = m_regA;
 }
 
 void C_CPU::STA_95(WORD opcode)//Zero_Page X, 4 cycles
 {
+	WORD data = ZeroPageX(4); 
 	//stores accumulator in memory. 
-	systemMem[ZeroPageX(4)] = m_regA;	
+	systemMem[data] = m_regA;	
 }
 
 void C_CPU::STA_8D(WORD opcode)//Absolute, 4 cycles
@@ -311,8 +313,9 @@ void C_CPU::STA_91(WORD opcode)//Indirect Y, 6 cycles
 /*************** STX FUNCTIONS *************************/
 void C_CPU::STX_86(WORD opcode)//Zero Page, 3 cycles
 {
+	WORD data = ZeroPageX(3);
 	//stores X register in memory
-	systemMem[ZeroPage(3)] = m_regX;
+	systemMem[data] = m_regX;
 }
 
 void C_CPU::STX_96(WORD opcode)//Zero_Page Y, 4 cycles

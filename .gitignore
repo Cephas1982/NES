@@ -21,6 +21,7 @@ Thumbs.db
 *.log
 [Bb]in
 [Dd]ebug*/
+[Ii]pch*/
 *.lib
 *.sbr
 obj/

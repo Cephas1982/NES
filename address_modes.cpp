@@ -2,36 +2,36 @@
 #define ADDRESS_MODES
 #include "CPU.h"
 
-WORD C_CPU::ZeroPage(int cycleCount)
+BYTE C_CPU::ZeroPage(int cycleCount)
 {
 	//get result using zero page
-	WORD result = m_pc + 1;
-
+	BYTE result = systemMem[m_pc + 1];
+	
 	m_cycleCount += cycleCount;
 	m_pc+= 2;
 
+	
 
-
-	return WORD(result);
+	return BYTE(result);
 	//todo TEST
 }
 
 WORD C_CPU::ZeroPageX(int cycleCount)
 {
 	//stores accumulator in memory. 
-	WORD result = m_pc + 1 + m_regX;
+	BYTE result = systemMem[m_pc + 1 + m_regX];
 		
 	m_cycleCount += cycleCount;
 	m_pc+= 2;
 
-	return result;
+	return WORD(result);
 	//todo TEST
 }
 
 WORD C_CPU::ZeroPageY(int cycleCount)//zero page Y
 {
 	//stores accumulator in memory. 
-	WORD result = m_pc + 1 + m_regY;
+	BYTE result = systemMem[m_pc + 1 + m_regY];
 		
 	m_cycleCount += cycleCount;
 	m_pc+= 2;

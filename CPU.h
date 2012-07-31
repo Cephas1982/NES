@@ -25,14 +25,14 @@ private:
 
 	//need to improve below
 	BYTE pStatus;
-	#define fC  0x1;
-	#define fZ  0x2;
-	#define fI  0x4;
-	#define fD  0x8;
-	#define fB  0x10;
-	#define fNULL  0x20;
-	#define fV  0x40;
-	#define fN  0x80;
+	#define fC  0x1
+	#define fZ  0x2
+	#define fI  0x4
+	#define fD  0x8
+	#define fB  0x10
+	#define fNULL  0x20
+	#define fV  0x40
+	#define fN  0x80
 	//std::vector<WORD> v_stack;//this handles push/pop for stack purposes
 
 	//MEMORY-------------------------
@@ -49,7 +49,7 @@ public:
 	void ProcessOpcode(WORD);
 
 	//Address modes ---- these functions return the next memory address
-	WORD ZeroPage(int cycleCount);
+	BYTE ZeroPage(int cycleCount);
 	WORD ZeroPageX(int cycleCount);
 	WORD ZeroPageY(int cycleCount);
 	WORD Absolute(int cycleCount);

@@ -30,9 +30,6 @@
     <ClCompile Include="load_and_store.cpp">
       <Filter>opcode functions</Filter>
     </ClCompile>
-    <ClCompile Include="address_modes.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="stack operations.cpp">
       <Filter>opcode functions</Filter>
     </ClCompile>
@@ -55,6 +52,9 @@
       <Filter>opcode functions</Filter>
     </ClCompile>
     <ClCompile Include="system_functions.cpp">
+      <Filter>opcode functions</Filter>
+    </ClCompile>
+    <ClCompile Include="address_modes.cpp">
       <Filter>opcode functions</Filter>
     </ClCompile>
   </ItemGroup>

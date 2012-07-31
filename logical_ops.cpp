@@ -9,8 +9,10 @@ void C_CPU::AND_29(WORD opcode)//Immediate, 2 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::AND_25(WORD opcode)//Zero_page, 3 cycles
@@ -20,8 +22,10 @@ void C_CPU::AND_25(WORD opcode)//Zero_page, 3 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::AND_35(WORD opcode)//Zero_page X, 4 cycles
@@ -31,8 +35,10 @@ void C_CPU::AND_35(WORD opcode)//Zero_page X, 4 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::AND_2D(WORD opcode)//Absolute, 4 cycles
@@ -42,8 +48,10 @@ void C_CPU::AND_2D(WORD opcode)//Absolute, 4 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::AND_3D(WORD opcode)//Absolute X, 4 cycles (+1 if page crossed)
@@ -54,8 +62,10 @@ void C_CPU::AND_3D(WORD opcode)//Absolute X, 4 cycles (+1 if page crossed)
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 	
 	//check if page crossed
@@ -71,8 +81,10 @@ void C_CPU::AND_39(WORD opcode)//Absolute Y, 4 cycles (+1 if page crossed)
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 
 	//check if page crossed
@@ -87,8 +99,10 @@ void C_CPU::AND_21(WORD opcode)//Indirect X, 6 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::AND_31(WORD opcode)//Indirect Y, 5 cycles (+1 if page crossed)
@@ -99,8 +113,10 @@ void C_CPU::AND_31(WORD opcode)//Indirect Y, 5 cycles (+1 if page crossed)
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 	if((m_pc & 0xFF00) != before)
 		m_cycleCount ++;//1 more cycle if page crossed	
@@ -115,8 +131,10 @@ void C_CPU::EOR_49(WORD opcode)//Immediate, 2 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::EOR_45(WORD opcode)//Zero_page, 3 cycles
@@ -126,8 +144,10 @@ void C_CPU::EOR_45(WORD opcode)//Zero_page, 3 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::EOR_55(WORD opcode)//Zero_page X, 4 cycles
@@ -137,8 +157,10 @@ void C_CPU::EOR_55(WORD opcode)//Zero_page X, 4 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::EOR_4D(WORD opcode)//Absolute, 4 cycles
@@ -148,8 +170,10 @@ void C_CPU::EOR_4D(WORD opcode)//Absolute, 4 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::EOR_5D(WORD opcode)//Absolute X, 4 cycles (+1 if page crossed)
@@ -160,8 +184,10 @@ void C_CPU::EOR_5D(WORD opcode)//Absolute X, 4 cycles (+1 if page crossed)
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 	
 	//check if page crossed
@@ -177,8 +203,10 @@ void C_CPU::EOR_59(WORD opcode)//Absolute Y, 4 cycles (+1 if page crossed)
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 
 	//check if page crossed
@@ -193,8 +221,10 @@ void C_CPU::EOR_41(WORD opcode)//Indirect X, 6 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::EOR_51(WORD opcode)//Indirect Y, 5 cycles (+1 if page crossed)
@@ -205,8 +235,10 @@ void C_CPU::EOR_51(WORD opcode)//Indirect Y, 5 cycles (+1 if page crossed)
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 	if((m_pc & 0xFF00) != before)
 		m_cycleCount ++;//1 more cycle if page crossed	
@@ -221,8 +253,10 @@ void C_CPU::ORA_09(WORD opcode)//Immediate, 2 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::ORA_05(WORD opcode)//Zero_page, 3 cycles
@@ -232,8 +266,10 @@ void C_CPU::ORA_05(WORD opcode)//Zero_page, 3 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::ORA_15(WORD opcode)//Zero_page X, 4 cycles
@@ -243,8 +279,10 @@ void C_CPU::ORA_15(WORD opcode)//Zero_page X, 4 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::ORA_0D(WORD opcode)//Absolute, 4 cycles
@@ -254,8 +292,10 @@ void C_CPU::ORA_0D(WORD opcode)//Absolute, 4 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::ORA_1D(WORD opcode)//Absolute X, 4 cycles (+1 if page crossed)
@@ -266,8 +306,10 @@ void C_CPU::ORA_1D(WORD opcode)//Absolute X, 4 cycles (+1 if page crossed)
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 	
 	//check if page crossed
@@ -283,8 +325,10 @@ void C_CPU::ORA_19(WORD opcode)//Absolute Y, 4 cycles (+1 if page crossed)
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 
 	//check if page crossed
@@ -299,8 +343,10 @@ void C_CPU::ORA_01(WORD opcode)//Indirect X, 6 cycles
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 }
 
 void C_CPU::ORA_11(WORD opcode)//Indirect Y, 5 cycles (+1 if page crossed)
@@ -311,8 +357,10 @@ void C_CPU::ORA_11(WORD opcode)//Indirect Y, 5 cycles (+1 if page crossed)
 	if(m_regA == 0)
 	  m_flagZ = 1;
 
-	if((m_regA & 128) == 128)
+	if((m_regA & 0x80) == 0x80)
 	  m_flagN = 1;
+	else
+	  m_flagN = 0;
 
 	if((m_pc & 0xFF00) != before)
 		m_cycleCount ++;//1 more cycle if page crossed	
@@ -327,16 +375,17 @@ void C_CPU::BIT_24(WORD opcode)//Zero_page, 3 cycles
 	if(result == 0)
 	  m_flagZ = 1;
 	
-	//TODO MAJOR FIX THIS--- to bit of mem val
-	if(result == 0)
-		m_flagV = false;
+	//set V register to bit 6 value of mem
+	if((mem & 0x40) == 0x40)
+		m_flagV = 1;
 	else
-		m_flagV = true;
+		m_flagV = 0;
 
-	if(result == 0)
-		m_flagN = false;
+	//set N register to bit 7 value of mem
+	if((mem & 0x80) == 0x80)
+		m_flagN = 1;
 	else
-		m_flagN = true;
+		m_flagN = 0;
 }
 
 void C_CPU::BIT_2C(WORD opcode)//Absolute, 4 cycles
@@ -347,15 +396,17 @@ void C_CPU::BIT_2C(WORD opcode)//Absolute, 4 cycles
 	if(result == 0)
 	  m_flagZ = 1;
 		
-	if(result == 0)
-		m_flagV = false;
+	//set V register to bit 6 value of mem
+	if((mem & 0x40) == 0x40)
+		m_flagV = 0;
 	else
-		m_flagV = true;
+		m_flagV = 1;
 
-	if(result == 0)
-		m_flagN = false;
+	//set N register to bit 7 value of mem
+	if((mem & 0x80) == 0x80)
+		m_flagN = 0x80;
 	else
-		m_flagN = true;
+		m_flagN = 1;
 }
 
 #endif
