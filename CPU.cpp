@@ -11,24 +11,20 @@ C_CPU::C_CPU()
 	m_flagI = true;//Don't know why this is true on init yet. Still debugging
 	m_flagD = false;
 	m_flagB = false;
+	m_emptyFlag = true;
 	m_flagV = false;
 	m_flagN = false;
 
-	m_stackFlagC = false;
-	m_stackFlagZ = false; 
-	m_stackFlagI = false;
-	m_stackFlagD = false;
-	m_stackFlagB = false;
-	m_stackFlagV = false;
-	m_stackFlagN = false;
+	
 
 	m_regA = 0;
 	m_regX = 0;
 	m_regY = 0;
 
+	m_regS = 0xFD;
 	count = 0;
 
-	
+	memset(mStack, 0, sizeof(mStack));
 }
 
 C_CPU::~C_CPU()
@@ -42,7 +38,6 @@ void C_CPU::GetNextCode()
 	//flag status
 	pStatus = 0;
 
-	pStatus |= fNULL;
 	if(m_flagC)
 		pStatus |= fC;
 	if(m_flagZ)
@@ -51,22 +46,38 @@ void C_CPU::GetNextCode()
 		pStatus |= fI;
 	if(m_flagD)
 		pStatus |= fD;
-	if(m_flagB)
-		pStatus |= fB;
+	if(m_flagB){
+		pStatus |= fB;//This can only be set by a BRK instruction or interrupt
+		
+		/*
+		1. Recognize interrupt request has occurred.
+		2. Complete execution of the current instruction.
+		3. Push the program counter and status register on to the stack.
+		4. Set the interrupt disable flag to prevent further interrupts.
+		5. Load the address of the interrupt handling routine from the vector table into the program
+		counter.
+		6. Execute the interrupt handling routine.
+		7. After executing a RTI (Return From Interrupt) instruction, pull the program counter and
+		status register values from the stack.
+		8. Resume execution of the program.
+		*/
+	}
 	if(m_flagV)
 		pStatus |= fV;
+	if(m_emptyFlag)
+		pStatus |= fE;
 	if(m_flagN)
 		pStatus |= fN;
 
 	WORD opcode = systemMem[m_pc] & 0x00FF;
-	printf("count: %d ", count++);
-	printf("PC:  %#X ", m_pc);
-	printf("opcode: %#X ", opcode); 
-	printf("A: %#x ", m_regA);
-	printf("X: %#x ", m_regX);
-	printf("Y: %#x ", m_regY);
-	printf("P: %#x ", pStatus);
-	printf("SP: %#x \n", m_regS);
+	printf("#:%-*d ", 5, count++);
+	printf("PC= %-#*X ", 8, m_pc);
+	printf("opcode= %-#*X ", 5, opcode); 
+	printf("A= %-#*x ", 5, m_regA);
+	printf("X= %-#*x ", 4, m_regX);
+	printf("Y= %-#*x ", 4, m_regY);
+	printf("P= %-#*x ", 4, pStatus);
+	printf("SP= %-#*x \n\n", 8, m_regS);
 	//system("pause");
 		ProcessOpcode(opcode);
 }

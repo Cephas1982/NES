@@ -28,10 +28,19 @@ indirect vector is not at the end of the page.
 void C_CPU::JSR_20(WORD opcode)//Absolute, 6 cycles
 {	
 	WORD result = Absolute(6);
-	//m_regS = m_pc;//push address to stack
+	BYTE A = m_pc >> 8;
+	BYTE B = m_pc & 0xff;
 
-	v_stack.push_back(m_pc);//push back program counter
+	//decrement BEFORE to pushing onto the stack
+	m_regS--;
+	mStack[m_regS]=A;
+	m_regS--;
+	mStack[m_regS]=B;
+	
+	//v_stack.push_back(m_pc);//push back program counter
 	m_pc = result; //JUMP to new address
+
+	//m_regS-= 2;// decrement when pushed on
 }
 
 //***************** RTS FUNCTIONS******************************************
@@ -41,10 +50,21 @@ void C_CPU::RTS_60(WORD opcode)//Implied, 6 cycles
 	//pulls program counter --- not advancing b/c it is implied (pc+1) and 
 	//$60 requires pc-1
 	
-	//m_pc = m_regS;
+	//when pulling from the stack you increment AFTER the pull
+	BYTE A = mStack[m_regS];
+	m_regS++;
+	BYTE B = mStack[m_regS];
+	m_regS++;
+
+	WORD returnLocation = B << 8;
+	returnLocation += A;
+
+	m_pc = returnLocation;
 
 	//old
-	m_pc = v_stack.back();
-	v_stack.pop_back();
+	//m_pc = v_stack.back();
+	//v_stack.pop_back();
+
+	//m_regS+= 2;// decrement when pushed on
 }
 #endif

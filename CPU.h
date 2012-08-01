@@ -16,11 +16,12 @@ private:
 	WORD m_pc;//program counter - Pointer to track where to read from____
 	//stackPointer TODO <- this
 	BYTE m_regA, m_regX, m_regY;  //Accumulator register -128 to 127, x register, y register
-	WORD m_regS; //stack register --- made 16bit so it's easier
+	WORD m_regS; //stack pointer register --- made 16bit so it's easier (decrements when byte is pushed, and increments when byte is pulled)
 	std::vector<WORD>v_stack;
 	//Carry, Zero, Interrupt Disable, Decimal Mode, Break cmd, Overflow, Negative
-	bool m_flagC, m_flagZ, m_flagI, m_flagD, m_flagB, m_flagV, m_flagN;
-	bool m_stackFlagC, m_stackFlagZ, m_stackFlagI, m_stackFlagD, m_stackFlagB, m_stackFlagV, m_stackFlagN;
+	bool m_flagC, m_flagZ, m_flagI, m_flagD, m_flagB, m_emptyFlag, m_flagV, m_flagN;
+
+	BYTE mStack[256];
 
 
 	//need to improve below
@@ -30,7 +31,7 @@ private:
 	#define fI  0x4
 	#define fD  0x8
 	#define fB  0x10
-	#define fNULL  0x20
+	#define fE  0x20
 	#define fV  0x40
 	#define fN  0x80
 	//std::vector<WORD> v_stack;//this handles push/pop for stack purposes
