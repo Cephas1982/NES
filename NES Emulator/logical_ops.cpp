@@ -259,8 +259,8 @@ void C_CPU::EOR_41(WORD opcode)//Indirect X, 6 cycles
 
 void C_CPU::EOR_51(WORD opcode)//Indirect Y, 5 cycles (+1 if page crossed)
 {
-	WORD before = m_pc ^ 0xFF00;//page before addition
-	m_regA = m_regA & systemMem[IndirectY(5)];
+	WORD before = m_pc & 0xFF00;//page before addition
+	m_regA = m_regA ^ systemMem[IndirectY(5)];
 
 	if(m_regA == 0)
 	  m_flagZ = 1;
@@ -398,7 +398,7 @@ void C_CPU::ORA_01(WORD opcode)//Indirect X, 6 cycles
 void C_CPU::ORA_11(WORD opcode)//Indirect Y, 5 cycles (+1 if page crossed)
 {
 	WORD before = m_pc | 0xFF00;//page before addition
-	m_regA = m_regA & systemMem[IndirectY(5)];
+	m_regA = m_regA | systemMem[IndirectY(5)];
 
 	if(m_regA == 0)
 	  m_flagZ = 1;

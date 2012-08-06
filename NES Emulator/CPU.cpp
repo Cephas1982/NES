@@ -253,7 +253,7 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	//In case of ORA - Logical inclusive 
 	case 0x09: ORA_09(opcode); break;
 	case 0x05: ORA_05(opcode); break;
-	case 0x15: ORA_05(opcode); break;
+	case 0x15: ORA_15(opcode); break;
 	case 0x0D: ORA_0D(opcode); break;
 	case 0x1D: ORA_1D(opcode); break;
 	case 0x19: ORA_19(opcode); break;

@@ -106,8 +106,18 @@ WORD C_CPU::Indirect(int cycleCount)//Indirect
 	CC <<= 8;
 	WORD CCBB = (CC | BB);
 
-	WORD XX = CCBB;
-	WORD YY = CCBB + 1;	
+	WORD XX = systemMem[CCBB];
+	WORD YY;
+	//DONT STEP OUT OF BOUNDS 
+	if(CCBB + 1 > 0x02FF)	{	
+		CCBB-= 0x00ff;
+		YY = systemMem[CCBB];	
+	}
+	else 
+		YY = systemMem[CCBB + 1];	
+
+	
+
 	YY <<= 8;
 	WORD result = (YY | XX);// 0xYYXX
 	
