@@ -451,15 +451,15 @@ void C_CPU::BIT_2C(WORD opcode)//Absolute, 4 cycles
 		
 	//set V register to bit 6 value of mem
 	if((mem & 0x40) == 0x40)
-		m_flagV = 0;
-	else
 		m_flagV = 1;
+	else
+		m_flagV = 0;
 
 	//set N register to bit 7 value of mem
 	if((mem & 0x80) == 0x80)
-		m_flagN = 0x80;
-	else
 		m_flagN = 1;
+	else
+		m_flagN = 0;
 }
 
 #endif

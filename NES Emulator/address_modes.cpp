@@ -138,10 +138,10 @@ WORD C_CPU::IndirectY(int cycleCount, int pagePlus)//Indirect Y
 {
 	//stores accumulator in memory.
 	WORD BB = systemMem[m_pc + 1];
-	WORD XX = systemMem[BYTE(BB + m_regY)];
-	WORD YY = systemMem[BYTE(BB + m_regY + 1)];	
+	WORD XX = systemMem[BB];
+	WORD YY = systemMem[BYTE(BB + 1)];	
 	YY <<= 8;
-	WORD result = (YY | XX);//YYXX
+	WORD result = (YY | XX) + m_regY;//YYXX
 	
 	//check for page cross
 	if(pagePlus != 0){

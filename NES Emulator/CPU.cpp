@@ -337,11 +337,11 @@ void C_CPU::ProcessOpcode(WORD opcode)
 	//Shifts --------------------------------
 	//In case of ASL - Arithmetic Shift Left
 	case 0x0A: ASL_0A(opcode); break;
-/*	case 0x06: ASL_06(opcode); break;
+	case 0x06: ASL_06(opcode); break;
 	case 0x16: ASL_16(opcode); break;
 	case 0x0E: ASL_0E(opcode); break;
 	case 0x1E: ASL_1E(opcode); break;
-
+/*
 */	//In case of LSR - Arithmetic Shift Right
 	case 0x4A: LSR_4A(opcode); break;
 	case 0x46: LSR_46(opcode); break;
@@ -351,18 +351,18 @@ void C_CPU::ProcessOpcode(WORD opcode)
 
 	//In case of ROL - Rotate Left
 	case 0x2A: ROL_2A(opcode); break;
-/*	case 0x26: ROL_26(opcode); break;
+	case 0x26: ROL_26(opcode); break;
 	case 0x36: ROL_36(opcode); break;
 	case 0x2E: ROL_2E(opcode); break;
 	case 0x3E: ROL_3E(opcode); break;
-*/
+
 	//In case of ROR - Rotate Right
 	case 0x6A: ROR_6A(opcode); break;
-/*	case 0x66: ROR_66(opcode); break;
+	case 0x66: ROR_66(opcode); break;
 	case 0x76: ROR_76(opcode); break;
 	case 0x6E: ROR_6E(opcode); break;
 	case 0x7E: ROR_7E(opcode); break;
-
+/*
 
 	/*** Jumps and Calls-------------------------------- */
 	//In case of JMP - Jump to another location

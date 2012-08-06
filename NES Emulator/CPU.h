@@ -241,11 +241,21 @@ public:
 
 	//In case of ASL - Arithmetic Shift Left
 	void ASL_0A(WORD);
-
+	void ASL_06(WORD);
+	void ASL_16(WORD);
+	void ASL_0E(WORD);
+	void ASL_1E(WORD);
 	//In case of ROR - Rotate Right
 	void ROR_6A(WORD);
-
+	void ROR_66(WORD);
+	void ROR_76(WORD);
+	void ROR_6E(WORD);
+	void ROR_7E(WORD);
 	//In case of ROL - Rotate Left
 	void ROL_2A(WORD);
+	void ROL_26(WORD);
+	void ROL_36(WORD);
+	void ROL_2E(WORD);
+	void ROL_3E(WORD);
 };
 #endif
